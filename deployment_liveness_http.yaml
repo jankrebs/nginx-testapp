@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        livenessProbe:
+          initialDelaySeconds: 10
+          timeoutSeconds: 4
+          failureThreshold: 3
+          httpGet:
+            scheme: HTTP
+            port: 80
+        ports:
+        - containerPort: 80
