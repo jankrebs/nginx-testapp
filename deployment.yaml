@@ -19,11 +19,8 @@ spec:
         - containerPort: 80
         livenessProbe:
           httpGet:
-            path: /healthz
-            port: 8080
-            httpHeaders:
-            - name: Custom-Header
-              value: Awesome
-          initialDelaySeconds: 3
-          periodSeconds: 3
+            path: /
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 5
 
